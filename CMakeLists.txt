@@ -19,6 +19,7 @@ set(msg_files
   msg/InformJobCrudResultCodes.msg
   msg/InitTrajEnum.msg
   msg/IoResultCodes.msg
+  msg/JointOrderEnum.msg
   msg/MotionReadyEnum.msg
   msg/QueueResultEnum.msg
   msg/SelectionResultCodes.msg

@@ -20,6 +20,11 @@
 # Joints or Cartesian
 ControlModeEnum control_mode
 
+# The order of the joints in the command and reply packets. This only makes a
+# difference for robots with seven axes, or with fewer than six. Defaults to the
+# order used by the 'joint_states' topic.
+JointOrderEnum joint_order
+
 ---
 # Result of the service invocation. Values other than one (1) signal failure.
 #
