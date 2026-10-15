@@ -8,8 +8,7 @@
 # Radians
 uint16 JOINT_ANGLES=1
 
-# X Y Z Rx Ry Rz Re
-# Rotations are applied intrinsicly in the order ZYX
+# X Y Z (meters), Qx Qy Qz Qw (quaternion), Re (radians)
 uint16 CARTESIAN=2
 
 uint16 value

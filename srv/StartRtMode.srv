@@ -3,10 +3,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# Enable the robot and activate the real-time streaming interface. This activates
-# a UDP server which listens on port 8889 (default) for a connection from an
-# external PC. The robot will accept positional increments from the remote PC
-# at the rate returned by this service. Please note that the streaming data is not
+# Enable the robot and start a session of the real-time streaming interface.
+# The robot will accept positional increments from the remote PC at the rate
+# returned by this service, on the UDP port which MotoROS2 opens when it starts
+# (22000 by default). Please note that the streaming data is not
 # a ROS2 message, but a raw UDP connection which follows the protocol described in
 # `https://github.com/Yaskawa-Global/motoros2/tree/main/doc/rt_control.md`. 
 #
@@ -46,21 +46,25 @@ string message
 uint16 period
 
 # Timeout for real time motion commands. If a command packet is not received
-# within this number of milliseconds, the motion mode will be cancelled.
+# within this number of milliseconds, the R/T session ends, and this service
+# must be called again. -1 means that there is no timeout.
 #
 # Additionally, if the client does not receive a reply packet within this
-# amount of time, then it should be assumed that the session is dead.
+# amount of time (unless it is -1), then it should be assumed that the session
+# is dead.
 #
-# The default for this timeout is 30 seconds. It can be modified in the 
+# The default for this timeout is 5 seconds. It can be modified in the
 # motoros2_config.yaml configuration file.
 int32 timeout_for_rt_msg
 
-# Each command packet must increment the sequence ID. If too many packets
-# are lost during communication, then it will be assumed that the PC is not
-# in sync with the robot.
+# The first command packet of a session must have sequence ID 0, and each one
+# after it must increment the sequence ID. If too many packets are lost during
+# communication, then it will be assumed that the PC is not in sync with the
+# robot.
 #
-# If the sequence ID of an incoming packet is different from the previous
-# command by a value greater than this, then the connection will be dropped.
-# The motion mode must be reactivated to be used again. The default for this
-# is 10. It can be modified in the motoros2_config.yaml configuration file.
+# If the sequence ID of an incoming packet is ahead of the previous command
+# by more than this, then the session ends, and this service must be called
+# again. (An older or repeated sequence ID gets the latest reply again.) The
+# default for this is 3. It can be modified in the motoros2_config.yaml
+# configuration file.
 int32 max_sequence_diff_for_rt_msg
