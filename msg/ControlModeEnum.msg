@@ -3,12 +3,24 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# The format of the incoming position data
+# The format of the incoming position data. The joint modes are recommended over
+# the Cartesian modes, because their motion is more predictable.
+#
+# The packetType of each command packet must have the same value.
 
-# Radians
+# Joint increments. Radians (meters for linear axes)
 uint16 JOINT_INCREMENTS=1
 
-# X Y Z (meters), Qx Qy Qz Qw (quaternion), Re (radians)
+# TCP increments in the robot frame. X Y Z (meters), Qx Qy Qz Qw (quaternion), Re (radians)
+# Only supported when every control group is a robot
 uint16 CARTESIAN_INCREMENTS=2
+
+# Joint positions. Radians (meters for linear axes)
+# Not supported for robots whose B axis moves automatically (ex: MPL80/100)
+uint16 JOINT_ABSOLUTE=3
+
+# TCP pose in the robot frame. X Y Z (meters), Qx Qy Qz Qw (quaternion), Re (radians)
+# Only supported when every control group is a robot
+uint16 CARTESIAN_ABSOLUTE=4
 
 uint16 value

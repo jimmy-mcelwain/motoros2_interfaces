@@ -4,11 +4,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Enable the robot and start a session of the real-time streaming interface.
-# The robot will accept positional increments from the remote PC at the rate
-# returned by this service, on the UDP port which MotoROS2 opens when it starts
-# (22000 by default). Please note that the streaming data is not
-# a ROS2 message, but a raw UDP connection which follows the protocol described in
-# `https://github.com/Yaskawa-Global/motoros2/tree/main/doc/rt_control.md`. 
+# The robot will accept absolute positions or position increments (see
+# 'control_mode') from the remote PC at the rate returned by this service, on
+# the UDP port which MotoROS2 opens when it starts (22000 by default).
+# Please note that the streaming data is not a ROS2 message, but a raw UDP
+# connection which follows the protocol described in
+# `https://github.com/Yaskawa-Global/motoros2/tree/main/doc/rt_control.md`.
 #
 # It is recommended to monitor the 'robot_status' topic prior to invoking this
 # service. This service can only succeed if 'mode' == AUTO, 'e_stopped' == FALSE,
@@ -17,7 +18,10 @@
 #
 # If this service is successful, the returned 'result_code' will indicate 'READY'.
 
-# Joints or Cartesian
+# What the command packets contain: joint positions or a TCP pose, or joint or
+# Cartesian increments. The joint modes are recommended over the Cartesian
+# modes, because their motion is more predictable.
+# Refer to ControlModeEnum.msg
 ControlModeEnum control_mode
 
 # The order of the joints in the command and reply packets. This only makes a
@@ -40,7 +44,7 @@ string message
 # CONFIGURATION INFO
 # ------------------
 
-# This period defines the rate at which motion increments will be accepted. 
+# This period defines the rate at which commands will be accepted.
 # (milliseconds). This is controlled by the number of axes connected to the
 # robot controller.
 uint16 period
