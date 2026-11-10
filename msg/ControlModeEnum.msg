@@ -6,9 +6,9 @@
 # The format of the incoming position data
 
 # Radians
-uint16 JOINT_ANGLES=1
+uint16 JOINT_INCREMENTS=1
 
 # X Y Z (meters), Qx Qy Qz Qw (quaternion), Re (radians)
-uint16 CARTESIAN=2
+uint16 CARTESIAN_INCREMENTS=2
 
 uint16 value
