@@ -73,4 +73,7 @@ string NOT_READY_SERVO_ON_TIMEOUT_STR="Timed out while waiting for servo on"
 uint16 NOT_READY_INVALID_SELECTION=119
 string NOT_READY_INVALID_SELECTION_STR="Invalid selection or arguments"
 
+uint16 NOT_READY_ALREADY_ACTIVE=120
+string NOT_READY_ALREADY_ACTIVE_STR="This motion mode is already active. Please call stop_traj_mode service to restart it"
+
 uint16 value
