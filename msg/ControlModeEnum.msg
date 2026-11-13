@@ -16,7 +16,6 @@ uint16 JOINT_INCREMENTS=1
 uint16 CARTESIAN_INCREMENTS=2
 
 # Joint positions. Radians (meters for linear axes)
-# Not supported for robots whose B axis moves automatically (ex: MPL80/100)
 uint16 JOINT_ABSOLUTE=3
 
 # TCP pose in the robot frame. X Y Z (meters), Qx Qy Qz Qw (quaternion), Re (radians)
